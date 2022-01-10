@@ -1,7 +1,7 @@
 // TODO: Include packages needed for this application
 const fs = require('fs');
 const inquirer = require('inquirer');
-const generateMarkdown = require('./Develop/utils/generateMarkdown');
+const generateMarkdown = require('./utils/generateMarkdown.js');
 const util = require('util');
 
 // TODO: Create an array of questions for user input
@@ -126,9 +126,19 @@ function writeToFile(fileName, data) {
         }
     })
 }
-
+const createReadMe = util.promisify(writeToFile);
 // TODO: Create a function to initialize app
-function init() {}
+function init() {
+    try {
+        const getAnswers = inquirer.prompt(questions);
+        console.log('Thank you! Your data is now being processed into a README.md: ', getAnswers);
+        const grabMarkdown = generateMarkdown(getAnswers);
+        console.log(grabMarkdown);
+        createReadMe('userReadMe', grabMarkdown);
+    } catch (error) {
+        console.log('Error :' + error);
+    }
+};
 
 // Function call to initialize app
 init();
