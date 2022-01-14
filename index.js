@@ -1,11 +1,14 @@
 // TODO: Include packages needed for this application
+// require filesystem
 const fs = require('fs');
+// require inquirer
 const inquirer = require('inquirer');
-const generateMarkdown = require('./utils/generateMarkdown.js');
+const generateMarkdown = require('./utils/generateMarkdown');
 const util = require('util');
 
 // TODO: Create an array of questions for user input
 const questions = [{
+    // Project Name
     type: 'input',
     name: 'title',
     message: 'What is the title of your GitHub repository? (REQUIRED)',
@@ -20,6 +23,7 @@ const questions = [{
     }
 },
 { 
+    // Description of Project
     type: 'input', 
     name: 'description',
     message: 'Please enter a description of your GitHub repository. (REQUIRED)',
@@ -38,6 +42,7 @@ const questions = [{
     message: 'Is there any installation instructions?',
 },
 {
+    // Installation instructions
     type: 'input',
     name: 'installation',
     message: 'Please list your installation instructions here.',
@@ -55,6 +60,7 @@ const questions = [{
     message: 'Would you like to give instructions on how to use your application?'
 },
 {
+    // Instruction on how to use the application
     type: 'input',
     name: 'instructions',
     message: 'Please enter instructions on how to use your application here.',
@@ -67,6 +73,7 @@ const questions = [{
     }
 },
 {
+    // Selecting licenses associated with project
     type: 'checkbox',
     name: 'license',
     message: 'Please choose a license.',
@@ -90,6 +97,7 @@ const questions = [{
     message: 'Would you like for other developers to be able to contribute to your project?'
 },
 {
+    // Contribution instructions
     type: 'input',
     name: 'contribution',
     message: 'Please let other developers know how they can contribute to your project.',
@@ -107,6 +115,7 @@ const questions = [{
     message: 'Can others test your project?'
 },
 {
+    // How to test project
     type: 'input',
     name: 'confirm',
     message: 'How can other test your project?',
@@ -116,28 +125,68 @@ const questions = [{
         } else false;
     }
 },
-];
+// Beginnning of 'questions'
+{
+    type: 'input',
+    name: 'github',
+    message: 'What is your GitHub username? (REQUIRED)',
+    validate: userInput => {
+        if (userInput) {
+            return true;
+        } else {
+            console.log('Please enter your GitHub user name.');
+        }
+    }
+},
+{
+    type: 'input',
+    name: 'email',
+    message: 'What is a good email to reach you at? (REQUIRED)',
+    validate: userInput => {
+        if (userInput) {
+            return true;
+        } else {
+            console.log('Please enter your email address.');
+        }
+    }
+}];
+// End of questions array
 
 // TODO: Create a function to write README file
 function writeToFile(fileName, data) {
-    fs.writeFile(fileName, data, error => {
-        if (error) {
-            return console.log('Error : ' + error);
-        }
-    })
+  fs.writeFile(fileName, data, (error) => {
+    if (error) {
+      return console.log('Sorry there was an error with creating your README.md' + error);
+    }
+  });
 }
-const createReadMe = util.promisify(writeToFile);
+
 // TODO: Create a function to initialize app
 function init() {
-    try {
-        const getAnswers = inquirer.prompt(questions);
-        console.log('Thank you! Your data is now being processed into a README.md: ', getAnswers);
-        const grabMarkdown = generateMarkdown(getAnswers);
-        console.log(grabMarkdown);
-        createReadMe('userReadMe', grabMarkdown);
-    } catch (error) {
-        console.log('Error :' + error);
-    }
+    inquirer.prompt(questions)
+    .then(function (userInput) {
+        console.log(userInput) 
+        writeToFile('userREADME.md' , generateMarkdown(userInput));
+    });
+};
+
+const createReadMe = util.promisify(writeToFile);
+// TODO: Create a function to initialize app
+
+async function init() {
+    // try allows us to define a block of code to be tested for errors
+  try {
+    const userAnswers = await inquirer.prompt(questions);
+    console.log('Thank you for using Professional README Generator your userREADME.md is now begin generated! ', userAnswers);
+    // get markdown template from generateMarkdown.js passing the answers as parameter
+    const userMarkdown = generateMarkdown(userAnswers);
+    console.log(userMarkdown);
+    //write the readme file after the markdown is made
+    await createReadMe('userREADME.md', userMarkdown);
+    // catch will catch any error that did occur in the code 
+  } catch (error) {
+    console.log('Sorry there was an error with creating your README.md' + error);
+  }
 };
 
 // Function call to initialize app
