@@ -1,23 +1,43 @@
-# Professional README
+# mario
 
 ## Description
- - create readme;
+
+ _Description of what user application should do:_
+
+ - jaja;
 
 ## Installation 
- - do this;
+
+ _How to install user application:_
+
+ - jaja;
 
 ## Usage 
- - like this;
+
+ _This walks us thorugh how to use this app:_
+
+ - klsadjf;
 
 ## License
+
+ _Any licesnse that we need to be aware of:_
+
  - Mozilla Public License 2.0;
 
 ## Contributing
- - help like this;
+
+ _How other developers may contribute to your project_
+
+ - jaja;
+
+ [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](code_of_conduct.md)
 
 ## Tests
- -run test;
+
+ _Instruction on how to run test for user project:_
+
+ -jaja;
 
 ## Questions
  - mgall13
- - mariogallardo@yahoo.com
+ - mgaioer@gmalar
