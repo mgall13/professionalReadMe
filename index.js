@@ -1,7 +1,5 @@
 // TODO: Include packages needed for this application
-// require filesystem
 const fs = require('fs');
-// require inquirer
 const inquirer = require('inquirer');
 const generateMarkdown = require('./utils/generateMarkdown');
 const util = require('util');
@@ -124,7 +122,9 @@ const questions = [{
         } else false;
     }
 },
-// Beginnning of 'questions'
+
+// Beginnning of 'questions on userREADME.md'
+
 {
     type: 'input',
     name: 'github',
@@ -162,7 +162,8 @@ function writeToFile(fileName, data) {
 
 // TODO: Create a function to initialize app
 function init() {
-    inquirer.prompt(questions)
+    inquirer
+    .prompt(questions)
     .then(function (userInput) {
         console.log(userInput) 
         writeToFile('userREADME.md' , generateMarkdown(userInput));
