@@ -1,10 +1,10 @@
-# professionalReadMe
+# professionReadMe
 
 ## Description
 
  _Description of what user application should do:_
 
- create readme;
+ creating readme.md;
 
 ## Installation 
 
@@ -28,7 +28,7 @@
 
  _How other developers may contribute to your project_
 
- do that;
+ do this;
 
  [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](code_of_conduct.md)
 
@@ -44,4 +44,5 @@
 
  Github: [mgall13](https://github.com/mgall13)
 
- Email: [mariogallardo1331](mailto:mariogallardo1331);
+ Email: [mariogallardo1331@yahoo.com](mailto:mariogallardo1331@yahoo.com);
+
